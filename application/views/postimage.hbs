@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/public/css/form.css">
+    <title>Post Image</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Post an Image here:</h1>
+        </header>
+        <form id="post-image-form">
+            <label for="post-title">Enter the post's title:</label>
+            <input id="post-title" type="text" placeholder="Post Title" required>
+            <br /><br />
+            <label for="post-desc">Enter the post's description:</label>
+            <input id="post-desc" type="text" placeholder="Post Description" required>
+            <br /><br />
+            <label for="img-select">Upload Image:</label>
+            <input id="img-select" type="file" accept="image/*" required/>
+            <br /><br />
+            <input id="acceptable-use" type="checkbox" required>
+            <label for="acceptable-use">I accept that my post follows the <a href="#">Acceptable Use Policy</a> for uploading images.</label>
+            <br /><br />
+            <input id="submit" type="submit">
+        </form>
+    </div>
+</body>
+</html>

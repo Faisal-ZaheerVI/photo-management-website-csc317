@@ -1,0 +1,104 @@
+body {
+    /* background-color:#1a2436; */
+    background: linear-gradient(90deg, rgba(0,9,28,1) 0%, rgba(0,45,98,1) 48%, rgba(0,108,204,1) 100%);
+    font-family: sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: linear-gradient(90deg, rgba(242,242,242,1) 0%, rgba(206,206,206,1) 40%, rgba(206,206,206,1) 60%, rgba(242,242,242,1) 100%);
+    padding: 20px;
+}
+
+.form-lbl {
+    font-weight: 600;
+}
+
+input[type=text], [type=password], [type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* input[type=text]:focus, [type=password]:focus {
+    background-color: #cae4ff;
+} */
+
+#submit {
+    background-color: #4c7faf;
+    border: 2px solid #3e668b;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    width: 100%;
+}
+  
+#submit:hover {
+    background-color: #456fa0;
+}
+
+#cancel {
+    background-color: #e92020;
+    border: 2px solid #801212;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    margin-top: 2em;
+    margin-left: 25%;
+    padding: 6px;
+    font-family: inherit;
+    font-size: 16px;
+    width: 50%;
+}
+
+#cancel:hover {
+    background-color: #cc1d1d;
+}
+
+#new-account {
+    width: 50%;
+    margin: 0 0 0 25%;
+    background-color: #4caf5c;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#new-account:hover {
+    background-color: #45a04c;
+}
+
+#forgotpwd {
+    margin: 0 0 0 37%;
+}
+
+#imagepost {
+    text-align: center;
+}
+
+.imgpost {
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+.invalid {
+    color: red;
+}
+
+.valid {
+    color: green;
+}
