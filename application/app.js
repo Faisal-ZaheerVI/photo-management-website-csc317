@@ -3,6 +3,9 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var sessions = require('express-session');
+var mysqlSession = require('express-mysql-session')(sessions);
+
 var handlebars = require("express-handlebars");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -23,6 +26,22 @@ app.engine(
   })
 );
 
+// Configure sessions?
+var mysqlSessionStore = new mysqlSession(
+  {
+    /* using default options */
+  },
+  require('./config/database')
+);
+
+app.use(sessions({
+  key: "csid",
+  secret: "this is a secret from cs317",
+  store: mysqlSessionStore,
+  resave: false,
+  saveUninitialized: false
+}));
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
@@ -32,6 +51,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+  console.log(req.session);
+  if(req.session.username) {
+    // If sessions is initialized, aka if logged in
+    res.locals.logged = true;
+  }
+  next();
+});
 
 app.use("/", indexRouter); // route middleware from ./routes/index.js
 app.use("/dbtest", dbRouter);

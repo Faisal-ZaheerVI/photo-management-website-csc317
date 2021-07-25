@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+/* REGISTER */
 router.post('/register', (req, res, next) => {
   let username = req.body.username;
   let email = req.body.email;
@@ -88,6 +89,7 @@ router.post('/register', (req, res, next) => {
   })
 });
 
+/* LOG IN */
 router.post('/login', (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
@@ -101,12 +103,14 @@ router.post('/login', (req, res, next) => {
    * Don't rely on just front end validation
    */
 
-  let baseSQL = "SELECT username, password FROM csc317db.users WHERE username=?;";
+  let baseSQL = "SELECT id, username, password FROM csc317db.users WHERE username=?;";
+  let userId;
   db.execute(baseSQL,[username])
   .then(([results, fields]) => {
     if (results && results.length == 1) {
       // Valid password by bcrypt
       let hashedPassword = results[0].password;
+      userId = results[0].id;
       return bcrypt.compare(password, hashedPassword);
     } else {
       // Invalid Credentials
@@ -117,8 +121,10 @@ router.post('/login', (req, res, next) => {
     if(passwordsMatch) {
       // Valid Credentials
       successPrint(`User ${username} is logged in`);
+      req.session.username = username;
+      req.session.userId = userId;
       res.locals.logged = true;
-      res.render('index'); // Doesn't work with res.redirect('/')
+      res.redirect("/");
     } else {
       throw new UserError("Invalid username and/or password", "/login", 200);
     }
@@ -133,6 +139,20 @@ router.post('/login', (req, res, next) => {
       next(err);
     }
   })
+});
+
+/* LOG OUT */
+router.post('/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    if(err) {
+      errorPrint('session could not be destroyed.');
+      next(err);
+    } else {
+      successPrint('Session was destroyed!');
+      res.clearCookie('csid');
+      res.json({status:"OK", message:"user is logged out"});
+    }
+  });
 });
 
 module.exports = router;
