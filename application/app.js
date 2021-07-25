@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var sessions = require('express-session');
 var mysqlSession = require('express-mysql-session')(sessions);
+var flash = require('express-flash');
 
 var handlebars = require("express-handlebars");
 var indexRouter = require("./routes/index");
@@ -22,7 +23,12 @@ app.engine(
     partialsDir: path.join(__dirname, "views/partials"), // where to look for partials
     extname: ".hbs", //expected file extension for handlebars files
     defaultLayout: "layout", //default layout for app, general template for all pages in app
-    helpers: {}, //adding new helpers to handlebars for extra functionality
+    helpers: {
+      emptyObject: (obj) => {
+        // If object is empty, then return false
+        return !(obj.constructor === Object && Object.keys(obj).length == 0);
+      }
+    }, //adding new helpers to handlebars for extra functionality
   })
 );
 
@@ -42,6 +48,7 @@ app.use(sessions({
   saveUninitialized: false
 }));
 
+app.use(flash());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");

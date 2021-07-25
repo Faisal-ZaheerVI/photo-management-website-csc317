@@ -45,3 +45,14 @@ div[id^="photo-"] h1 {
     max-height: 135px;
     color: #fff;
 }
+
+#flash-message {
+    position: fixed; /* or absolute to not mess with grids */
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%,0);
+}
+
+#flash-message div {
+    text-align: center;
+}

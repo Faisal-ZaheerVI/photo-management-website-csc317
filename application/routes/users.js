@@ -15,7 +15,7 @@ router.post('/register', (req, res, next) => {
   let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
-  let cpassword = req.body.cpassword;
+  let cpassword = req.body.password;
 
   /**
    * Do server side validation
@@ -47,18 +47,6 @@ router.post('/register', (req, res, next) => {
       );
     }
   })
-  // .then(([results, fields]) => {
-  //   if(results && results.length == 0) {
-  //     let baseSQL = "INSERT INTO csc317db.users (username, email, password, created) VALUES (?,?,?,now());";
-  //     return db.execute(baseSQL, [username, email, password]);
-  //   } else {
-  //     throw new UserError(
-  //       "Registration Failed: Email already exists",
-  //       "/registration",
-  //       200
-  //     );
-  //   }
-  // })
   .then((hashedPassword) => {
     let baseSQL = "INSERT INTO csc317db.users (username, email, password, created) VALUES (?,?,?,now());";
     return db.execute(baseSQL, [username, email, hashedPassword]);
@@ -66,6 +54,7 @@ router.post('/register', (req, res, next) => {
   .then(([results, fields]) => {
     if(results && results.affectedRows) {
       successPrint("User.js --> User was created!");
+      req.flash('success', 'User account has been made!');
       res.redirect('/login');
     } else {
       throw new UserError(
@@ -80,6 +69,7 @@ router.post('/register', (req, res, next) => {
     if(err instanceof UserError) {
       // User error
       errorPrint(err.getMessage());
+      req.flash('error', err.getMessage());
       res.status(err.getStatus());
       res.redirect(err.getRedirectURL());
     } else {
@@ -124,6 +114,7 @@ router.post('/login', (req, res, next) => {
       req.session.username = username;
       req.session.userId = userId;
       res.locals.logged = true;
+      req.flash('success', 'You have been successfully logged in!');
       res.redirect("/");
     } else {
       throw new UserError("Invalid username and/or password", "/login", 200);
@@ -133,6 +124,7 @@ router.post('/login', (req, res, next) => {
     errorPrint("user login failed");
     if (err instanceof UserError) {
       errorPrint(err.getMessage());
+      req.flash('error', err.getMessage());
       res.status(err.getStatus());
       res.redirect('/login');
     } else {
