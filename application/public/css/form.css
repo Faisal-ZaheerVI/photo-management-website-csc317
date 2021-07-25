@@ -1,4 +1,4 @@
-body {
+#form-body {
     /* background-color:#1a2436; */
     background: linear-gradient(90deg, rgba(0,9,28,1) 0%, rgba(0,45,98,1) 48%, rgba(0,108,204,1) 100%);
     font-family: sans-serif;

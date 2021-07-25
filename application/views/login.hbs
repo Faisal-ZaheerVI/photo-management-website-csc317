@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/public/css/form.css">
-    <title>Login</title>
-</head>
-<body>
+<body id="form-body">
     <div class="container">
         <header>
             <h1>Log In</h1>
         </header>
-        <form id="login-form">
+        <form id="login-form" method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
             <label for="username" class="form-label">Username:</label>
-            <input id="username" type="text" placeholder="Enter your username" required>
+            <input id="username" name="username" type="text" placeholder="Enter your username" required>
             <br /><br />
             <label for="password" class="form-label">Password:</label>
-            <input id="password" type="password" placeholder="Enter your password" required>
+            <input id="password" name="password" type="password" placeholder="Enter your password" required>
             <br /><br />
             <button id="submit">Log In</button>
             <br /><br />
@@ -27,4 +18,3 @@
         </form>
     </div>
 </body>
-</html>

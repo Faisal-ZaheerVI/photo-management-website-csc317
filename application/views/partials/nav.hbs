@@ -1,0 +1,30 @@
+{{!-- 
+<nav id="nav-bar">
+    <div id="brand" class="nav-items">
+        <a href="/" id="brand-anchor"><span id="brand-text"><i style="margin-right: .2rem;">i</i>PA</span></a>
+    </div>
+    <input id="search-text" name="search-text" type="text">
+    <i id="text-bar-icon" class="fas fa-search nav-items"></i>
+    <a href="/postimage" id="post-button" class="nav-items anchor-buttons">Post</a>
+    {{#if logged}}
+        <!-- Logged in -->
+        <a href="/users/logout" id="authenticate-button" class="nav-items anchor-buttons">Log Out</a>
+    {{else}}
+        <!-- Not logged in (or log in unsuccessful) -->
+        <a href="/login" id="authenticate-button" class="nav-items anchor-buttons">Log in</a>
+    {{/if}}
+</nav> --}}
+
+<nav>
+    <a href="/">Home</a> | 
+    {{#if logged}}
+    <!-- Logged in -->
+    <a href="/users/logout">Log Out</a> |
+    {{else}}
+    <!-- Not logged in (or log in unsuccessful) -->
+    <a href="/login">Log in</a> |
+    {{/if}}
+    <a href="/registration">Registration</a> |
+    <a href="/postimage">Post an Image</a> |
+    <a href="/imagepost">Image Post</a>
+</nav>

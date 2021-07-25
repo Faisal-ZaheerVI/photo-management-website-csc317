@@ -6,6 +6,9 @@ var logger = require("morgan");
 var handlebars = require("express-handlebars");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var errorPrint = require('./helpers/debug/debugprinters').errorPrint;
+var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
+var dbRouter = require('./routes/dbtest');
 
 var app = express();
 
@@ -31,8 +34,13 @@ app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter); // route middleware from ./routes/index.js
+app.use("/dbtest", dbRouter);
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
 
+app.use((err, req, res, next) => {
+    res.status(500);
+    res.send('something went wrong with your db');
+})
 
 /**
  * Catch all route, if we get to here then the 
