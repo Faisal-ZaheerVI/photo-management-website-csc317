@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const UserError = require('../helpers/error/UserError');
-const {successPrint, errorPrint} = require('../helpers/debug/debugprinters');
 var db = require('../config/database');
+const UserError = require('../helpers/error/UserError');
+const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
+var bcrypt = require('bcrypt');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -35,8 +36,8 @@ router.post('/register', (req, res, next) => {
   })
   .then(([results, fields]) => {
     if(results && results.length == 0) {
-      let baseSQL = "INSERT INTO csc317db.users (username, email, password, created) VALUES (?,?,?,now());";
-      return db.execute(baseSQL, [username, email, password]);
+      // Hashes password for 2^15 rounds (~3 sec/hash)
+      return bcrypt.hash(password, 15);
     } else {
       throw new UserError(
         "Registration Failed: Email already exists",
@@ -44,6 +45,22 @@ router.post('/register', (req, res, next) => {
         200
       );
     }
+  })
+  // .then(([results, fields]) => {
+  //   if(results && results.length == 0) {
+  //     let baseSQL = "INSERT INTO csc317db.users (username, email, password, created) VALUES (?,?,?,now());";
+  //     return db.execute(baseSQL, [username, email, password]);
+  //   } else {
+  //     throw new UserError(
+  //       "Registration Failed: Email already exists",
+  //       "/registration",
+  //       200
+  //     );
+  //   }
+  // })
+  .then((hashedPassword) => {
+    let baseSQL = "INSERT INTO csc317db.users (username, email, password, created) VALUES (?,?,?,now());";
+    return db.execute(baseSQL, [username, email, hashedPassword]);
   })
   .then(([results, fields]) => {
     if(results && results.affectedRows) {
@@ -84,16 +101,25 @@ router.post('/login', (req, res, next) => {
    * Don't rely on just front end validation
    */
 
-  let baseSQL = "SELECT username, password FROM csc317db.users WHERE username=? AND password=?;";
-  db.execute(baseSQL,[username, password])
+  let baseSQL = "SELECT username, password FROM csc317db.users WHERE username=?;";
+  db.execute(baseSQL,[username])
   .then(([results, fields]) => {
     if (results && results.length == 1) {
+      // Valid password by bcrypt
+      let hashedPassword = results[0].password;
+      return bcrypt.compare(password, hashedPassword);
+    } else {
+      // Invalid Credentials
+      throw new UserError("invalid username and/or password", "/login", 200);
+    }
+  })
+  .then((passwordsMatch) => {
+    if(passwordsMatch) {
       // Valid Credentials
       successPrint(`User ${username} is logged in`);
       res.locals.logged = true;
       res.render('index'); // Doesn't work with res.redirect('/')
     } else {
-      // Invalid Credentials
       throw new UserError("Invalid username and/or password", "/login", 200);
     }
   })
