@@ -10,9 +10,10 @@ var flash = require('express-flash');
 var handlebars = require("express-handlebars");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var postsRouter = require("./routes/posts");
 var errorPrint = require('./helpers/debug/debugprinters').errorPrint;
 var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
-var dbRouter = require('./routes/dbtest');
+// var dbRouter = require('./routes/dbtest');
 
 var app = express();
 
@@ -69,8 +70,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRouter); // route middleware from ./routes/index.js
-app.use("/dbtest", dbRouter);
+// app.use("/dbtest", dbRouter);
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
+app.use('/posts', postsRouter); // route middleware from ./routes/posts.js
 
 app.use((err, req, res, next) => {
     res.status(500);

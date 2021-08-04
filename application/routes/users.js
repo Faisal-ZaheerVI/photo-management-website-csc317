@@ -23,6 +23,18 @@ router.post('/register', (req, res, next) => {
    * Don't rely on just front end validation
    */
 
+  /* REGISTER VALIDATION */
+  // if(username.length < 3) {
+  //   throw new UserError(
+  //     "Registration Failed: Username must be 3 or more characters",
+  //     "/registration",
+  //     200
+  //   );
+  // }
+  // else {
+  //   next();
+  // }
+
   db.execute("SELECT * FROM csc317db.users WHERE username=?", [username])
   .then(([results, fields]) => {
     if(results && results.length == 0) {

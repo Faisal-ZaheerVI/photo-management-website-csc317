@@ -1,5 +1,4 @@
-{{!-- 
-<nav id="nav-bar">
+{{!-- <nav id="nav-bar">
     <div id="brand" class="nav-items">
         <a href="/" id="brand-anchor"><span id="brand-text"><i style="margin-right: .2rem;">i</i>PA</span></a>
     </div>
@@ -8,23 +7,25 @@
     <a href="/postimage" id="post-button" class="nav-items anchor-buttons">Post</a>
     {{#if logged}}
         <!-- Logged in -->
-        <a href="/users/logout" id="authenticate-button" class="nav-items anchor-buttons">Log Out</a>
+        <a id="authenticate-button" class="nav-items anchor-buttons">Log Out</a>
     {{else}}
         <!-- Not logged in (or log in unsuccessful) -->
         <a href="/login" id="authenticate-button" class="nav-items anchor-buttons">Log in</a>
     {{/if}}
 </nav> --}}
 
-<nav>
-    <a href="/">Home</a> | 
-    {{#if logged}}
+<nav id="nav-bar">
+    <div id="brand" class="nav-items">
+        <a href="/" id="brand-anchor"><span id="brand-text">Home</span></a>
+    </div>
+    <input id="search-text" name="search-text" type="text">
+    <i id="search-button" class="bi bi-search nav-items"></i>
+    <a href="/postimage" id="post-button" class="nav-items anchor-buttons">Upload</a>
     <!-- Logged in -->
-    <a href="" id="logout-button">Log Out</a> |
-    {{else}}
+    {{#if logged}}
+        <a href="" id="logout-button" class="authenticate-button nav-items anchor-buttons">Log Out</a>
     <!-- Not logged in (or log in unsuccessful) -->
-    <a href="/login" id="login-button">Log in</a> |
-    {{/if}}
-    <a href="/registration">Registration</a> |
-    <a href="/postimage">Post an Image</a> |
-    <a href="/imagepost">Image Post</a>
+    {{else}}
+        <a href="/login" id="login-button" class="authenticate-button nav-items anchor-buttons">Log in</a>
+    {{/if}}        
 </nav>

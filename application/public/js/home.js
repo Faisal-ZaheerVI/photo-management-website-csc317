@@ -1,69 +1,73 @@
-function fadeOut(event) {
-    // alert('Photo is clicked!');
-    console.log(event.path[1].id);
-    let count = document.getElementById('items-count');
-    let main = document.getElementById('container');
-    console.log(main);
-    let card = document.getElementById(event.path[1].id);
-    card.style.opacity = 1;
-    setInterval(() => {
-        if (card.style.opacity > 0) {
-            card.style.opacity -= 0.1;
-        }
-        else {
-            main.removeChild(card);
-            count.innerHTML = `There are ${main.childElementCount} photo(s) being shown`; 
-        }
-    }, 30);
-}
-
-function createPhotoCard(data, containerDiv) {
-    let div = document.createElement('div');
-    let img = document.createElement('img');
-    let h1 = document.createElement('h1');
-    img.src = data.url;
-    h1.innerText = data.title;
-    img.alt = "this was supposed to be a photo";
-    div.setAttribute('id', 'photo-'+data.id);
-    div.classList.add('fadeOut');
-    div.addEventListener('click', fadeOut);
-    div.appendChild(img);
-    div.appendChild(h1);
-    containerDiv.appendChild(div);
-}
-
-let mainDiv = document.getElementById("container");
-
-if(mainDiv) {
-    let fetchURL = "https://jsonplaceholder.typicode.com/albums/2/photos";
-    fetch(fetchURL)
-    .then((data) => data.json())
-    .then((photos) => {
-        let innerHTML = "";
-        photos.forEach((photo) => {
-            createPhotoCard(photo, mainDiv);
-        });
-        document.getElementById('items-count').innerHTML = `There are ${photos.length} photo(s) being shown`;
-    })
-}
-
 /* FLASH MESSAGE FADE OUT */
-function setFlashMessageFadeOut() {
+function setFlashMessageFadeOut(flashMessageElement) {
     setTimeout(() => {
         let currentOpacity = 1.0;
         // setInterval function is triggered every 50ms
         let timer = setInterval(() => {
             if (currentOpacity < 0.05) {
                 clearInterval(timer);
-                flashElement.remove();
+                flashMessageElement.remove();
             }
             currentOpacity = currentOpacity - .05; // In charge of how smooth the fadeout is
-            flashElement.style.opacity = currentOpacity;
+            flashMessageElement.style.opacity = currentOpacity;
         }, 50);
     }, 4000);
 }
 
+function addFlashFromFrontEnd(message) {
+    let flashMessageDiv = document.createElement('div');
+    let innerFlashDiv = document.createElement('div');
+    let innerTextNode = document.createTextNode(message);
+    innerFlashDiv.appendChild(innerTextNode);
+    flashMessageDiv.appendChild(innerFlashDiv);
+    flashMessageDiv.setAttribute('id', 'flash-message');
+    innerFlashDiv.setAttribute('class', 'alert alert-info');
+    document.getElementsByTagName('body')[0].appendChild(flashMessageDiv);
+    setFlashMessageFadeOut(flashMessageDiv);
+}
+
+function createCard(postData) {
+    return `<div id="post-${postData.id}" class="card">
+    <img class="card-image" src="${postData.thumbnail}" alt="Missing Image">
+    <div class="card-body">
+        <p class="card-title">${postData.title}</p>
+        <p class="card-text">${postData.description}</p>
+        <a href="/post/${postData.id}" class="anchor-buttons">Post Details</a>
+    </div>
+</div>`;
+}
+
+function executeSearch() {
+    let searchTerm = document.getElementById('search-text').value;
+    if(!searchTerm) {
+        location.replace('/');
+        return;
+    }
+    let mainContent = document.getElementById('main-content');
+    let searchURL = `/posts/search?search=${searchTerm}`;
+    fetch(searchURL)
+    .then((data) => {
+        return data.json();
+    })
+    .then((data_json) => {
+        let newMainContentHTML = '';
+        data_json.results.forEach((row) => {
+            newMainContentHTML += createCard(row);
+        });
+        mainContent.innerHTML = newMainContentHTML;
+        if(data_json.message) {
+            addFlashFromFrontEnd(data_json.message);
+        }
+    })
+    .catch((err) => console.log(err));
+}
+
 let flashElement = document.getElementById('flash-message');
 if(flashElement) {
-    setFlashMessageFadeOut();
+    setFlashMessageFadeOut(flashElement);
+}
+
+let searchButton = document.getElementById('search-button');
+if(searchButton) {
+    searchButton.onclick = executeSearch;
 }

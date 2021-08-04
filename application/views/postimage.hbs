@@ -1,22 +1,29 @@
-<body id="form-body">
-    <div class="container">
-        <header>
-            <h1>Post an Image here:</h1>
-        </header>
-        <form id="post-image-form">
-            <label for="post-title">Enter the post's title:</label>
-            <input id="post-title" type="text" placeholder="Post Title" required>
-            <br /><br />
-            <label for="post-desc">Enter the post's description:</label>
-            <input id="post-desc" type="text" placeholder="Post Description" required>
-            <br /><br />
-            <label for="img-select">Upload Image:</label>
-            <input id="img-select" type="file" accept="image/*" required/>
-            <br /><br />
-            <input id="acceptable-use" type="checkbox" required>
-            <label for="acceptable-use">I accept that my post follows the <a href="#">Acceptable Use Policy</a> for uploading images.</label>
-            <br /><br />
-            <input id="submit" type="submit">
-        </form>
-    </div>
-</body>
+<div class="form-container">
+    <header class="form-header">
+        <h1>Post an Image here:</h1>
+    </header>
+    <form id="post-image" method="POST" enctype="multipart/form-data" action='/posts/createPost'>
+        <label for="post-title">Enter the post's title:</label>
+        <input id="post-title" type="text" placeholder="Post Title" name="title" required>
+        <br /><br />
+        <label for="post-desc">Enter the post's description:</label>
+        <input id="post-desc" type="text" placeholder="Post Description" name="description" required>
+        <br /><br />
+        <label for="img-select">Upload Image:</label>
+        <input id="img-select" type="file" accept="image/*" name="uploadImage" required/>
+        <br /><br />
+        <input id="acceptable-use" type="checkbox" required>
+        <label for="acceptable-use">I accept that my post follows the <a href="#">Acceptable Use Policy</a> for uploading images.</label>
+        <br /><br />
+        <input id="submit" type="submit">
+
+        {{!-- 
+        <button id="submit" class="btn btn-success post-submit form-button" type="submit">
+            Submit
+        </button>
+        <button id="cancel" class="btn btn-danger post-submit form-button" type="reset">
+            Cancel
+        </button>
+         --}}
+    </form>
+</div>

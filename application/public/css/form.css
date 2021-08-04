@@ -1,14 +1,8 @@
-#form-body {
-    /* background-color:#1a2436; */
-    background: linear-gradient(90deg, rgba(0,9,28,1) 0%, rgba(0,45,98,1) 48%, rgba(0,108,204,1) 100%);
-    font-family: sans-serif;
-}
-
-.container {
-    max-width: 500px;
-    margin: 2rem auto;
+.form-container {
+    max-width: 550px;
+    margin: 50px auto;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     background: linear-gradient(90deg, rgba(242,242,242,1) 0%, rgba(206,206,206,1) 40%, rgba(206,206,206,1) 60%, rgba(242,242,242,1) 100%);
     padding: 20px;
 }
@@ -20,7 +14,7 @@
 input[type=text], [type=password], [type=email] {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    /* margin: 8px 0; */
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -68,6 +62,8 @@ input[type=text], [type=password], [type=email] {
 }
 
 #new-account {
+    display: inline-block;
+    text-align: center;
     width: 50%;
     margin: 0 0 0 25%;
     background-color: #4caf5c;
@@ -90,10 +86,10 @@ input[type=text], [type=password], [type=email] {
     text-align: center;
 }
 
-.imgpost {
+/* .imgpost {
     border: 1px solid black;
     border-radius: 25px;
-}
+} */
 
 .invalid {
     color: red;

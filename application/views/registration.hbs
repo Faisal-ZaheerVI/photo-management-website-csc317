@@ -1,40 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script defer src="/public/js/formvalidation.js"></script>
-</head>
-<body id="form-body">
-    <div class="container">
-        <header>
-            <h1>Registration here:</h1>
-        </header>
-        <form class="form-reg" method="POST" action="/users/register" enctype="application/x-www-form-urlencoded">
-            <label id="lbl-username" for="username" class="form-lbl form-lbl-uname">Username</label>
-            <input id="username" name="username" type="text" class="text-input form-input-uname" placeholder="Enter a username" required>
-            <div id="uname-error"></div>
-            <!-- <span id="uname-error" class=""></span> -->
-            <br /><br />
-            <label id="lbl-email" for="email" class="form-lbl form-lbl-email">Email</label>
-            <input id="email" name="email" type="email" class="text-input form-input-email" placeholder="Enter an email address" required>
-            <div id="email-error"></div>
-            <br /><br />
-            <label id="lbl-password" for="password" class="form-lbl form-lbl-passwd">Password</label>
-            <input id="password" name="password" type="password" class="text-input form-input-passwd" placeholder="Enter a password" required>
-            <div id="passwd-error"></div>
-            <br /><br />
-            <label id="lbl-cpassword" for="cpassword" class="form-lbl form-lbl-cpasswd">Confirm Password</label>
-            <input id="cpassword" type="password" class="text-input form-input-cpasswd" placeholder="Confirm password" required>
-            <div id="cpasswd-error"></div>
-            <br /><br />
-            <input id="age-check" type="checkbox" required>
-            <label id="lbl-agecheck" for="age-check" class="form-checkbox">I certify that I am 13 years of age or older.</label>
-            <br /><br />
-            <input id="tos-pr-check" type="checkbox" required>
-            <label id="lbl-tos-pr-check" for="tos-pr-check" class="form-checkbox">I have read and accept the <a href="#">Terms of Service</a> and <a href="#">Privacy Rules</a>.</label>
-            <br /><br />
-            <button id="submit" type="submit">Submit</button>
-            <button id="cancel" type="reset">Cancel</button>
-        </form>
-    </div>
-</body>
-</html>
+<div class="form-container">
+    <header class="form-header">
+        <h1>Registration here:</h1>
+    </header>
+    <form class="form-reg" method="POST" action="/users/register" enctype="application/x-www-form-urlencoded">
+        <label id="lbl-username" for="username" class="form-lbl form-lbl-uname">Username</label>
+        <input id="username" name="username" type="text" class="text-input form-input-uname" placeholder="Enter a username" required>
+        <div id="uname-error"></div>
+        <br /><br />
+        <label id="lbl-email" for="email" class="form-lbl form-lbl-email">Email</label>
+        <input id="email" name="email" type="email" class="text-input form-input-email" placeholder="Enter an email address" required>
+        <div id="email-error"></div>
+        <br /><br />
+        <label id="lbl-password" for="password" class="form-lbl form-lbl-passwd">Password</label>
+        <input id="password" name="password" type="password" class="text-input form-input-passwd" placeholder="Enter a password" required>
+        <div id="passwd-error"></div>
+        <br /><br />
+        <label id="lbl-cpassword" for="cpassword" class="form-lbl form-lbl-cpasswd">Confirm Password</label>
+        <input id="cpassword" type="password" class="text-input form-input-cpasswd" placeholder="Confirm password" required>
+        <div id="cpasswd-error"></div>
+        <br /><br />
+        <input id="age-check" type="checkbox" required>
+        <label id="lbl-agecheck" for="age-check" class="form-checkbox">I certify that I am 13 years of age or older.</label>
+        <br /><br />
+        <input id="tos-pr-check" type="checkbox" required>
+        <label id="lbl-tos-pr-check" for="tos-pr-check" class="form-checkbox">I have read and accept the <a href="#">Terms of Service</a> and <a href="#">Privacy Rules</a>.</label>
+        <br /><br />
+        <button id="submit" type="submit">Submit</button>
+        <button id="cancel" type="reset">Cancel</button>
+    </form>
+</div>
