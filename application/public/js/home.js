@@ -14,6 +14,19 @@ function setFlashMessageFadeOut(flashMessageElement) {
     }, 4000);
 }
 
+function addFlashFromFrontEnd(message, level) {
+    let flashMessageDiv = document.createElement('div');
+    let innerFlashDiv = document.createElement('div');
+    let innerTextNode = document.createTextNode(message);
+    innerFlashDiv.appendChild(innerTextNode);
+    flashMessageDiv.appendChild(innerFlashDiv);
+    flashMessageDiv.setAttribute('id', 'flash-message');
+    innerFlashDiv.setAttribute('class', `alert alert-${level}`);
+    document.getElementsByTagName('body')[0].appendChild(flashMessageDiv);
+    setFlashMessageFadeOut(flashMessageDiv);
+}
+
+/*
 function addFlashFromFrontEnd(message) {
     let flashMessageDiv = document.createElement('div');
     let innerFlashDiv = document.createElement('div');
@@ -25,6 +38,7 @@ function addFlashFromFrontEnd(message) {
     document.getElementsByTagName('body')[0].appendChild(flashMessageDiv);
     setFlashMessageFadeOut(flashMessageDiv);
 }
+*/
 
 function createCard(postData) {
     return `<div id="post-${postData.id}" class="card">

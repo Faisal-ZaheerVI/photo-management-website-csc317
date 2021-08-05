@@ -1,14 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../config/database');
+const UserModel = require('../models/Users');
 const UserError = require('../helpers/error/UserError');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
 var bcrypt = require('bcrypt');
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
 /* REGISTER */
 router.post('/register', (req, res, next) => {
@@ -23,18 +19,57 @@ router.post('/register', (req, res, next) => {
    * Don't rely on just front end validation
    */
 
-  /* REGISTER VALIDATION */
-  // if(username.length < 3) {
-  //   throw new UserError(
-  //     "Registration Failed: Username must be 3 or more characters",
-  //     "/registration",
-  //     200
-  //   );
-  // }
-  // else {
-  //   next();
-  // }
+  UserModel.usernameExists(username)
+  .then((userNameDoesExist) => {
+    if(userNameDoesExist) {
+      throw new UserError(
+        "Registration Failed: Username already exists",
+        "/registration",
+        200
+      );
+    } else {
+      return UserModel.emailExists(email);
+    }
+  })
+  .then((emailDoesExist) => {
+    if(emailDoesExist) {
+      throw new UserError(
+        "Registration Failed: Email already exists",
+        "/registration",
+        200
+      );
+    } else {
+      return UserModel.create(username, password, email);
+    }
+  })
+  .then((createdUserId) => {
+    if(createdUserId < 0) {
+      throw new UserError(
+        "Server Error, user could not be created",
+        "/registration",
+        500
+      );
+    } else {
+      successPrint("User.js --> User was created!");
+      req.flash('success', 'User account has been made!');
+      res.redirect('/login');
+    }
+  })
+  .catch((err) => {
+    errorPrint("User could not be made", err);
+    if(err instanceof UserError) {
+      // User error
+      errorPrint(err.getMessage());
+      req.flash('error', err.getMessage());
+      res.status(err.getStatus());
+      res.redirect(err.getRedirectURL());
+    } else {
+      // General Errors
+      next(err);
+    }
+  });
 
+/*
   db.execute("SELECT * FROM csc317db.users WHERE username=?", [username])
   .then(([results, fields]) => {
     if(results && results.length == 0) {
@@ -88,7 +123,8 @@ router.post('/register', (req, res, next) => {
       // General Errors
       next(err);
     }
-  })
+  });
+  */
 });
 
 /* LOG IN */
@@ -96,38 +132,24 @@ router.post('/login', (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
 
-  console.log(username);
-  console.log(password);
-
   /**
    * Do server side validation
    * not done in video, must do on your own
    * Don't rely on just front end validation
    */
 
-  let baseSQL = "SELECT id, username, password FROM csc317db.users WHERE username=?;";
-  let userId;
-  db.execute(baseSQL,[username])
-  .then(([results, fields]) => {
-    if (results && results.length == 1) {
-      // Valid password by bcrypt
-      let hashedPassword = results[0].password;
-      userId = results[0].id;
-      return bcrypt.compare(password, hashedPassword);
-    } else {
-      // Invalid Credentials
-      throw new UserError("invalid username and/or password", "/login", 200);
-    }
-  })
-  .then((passwordsMatch) => {
-    if(passwordsMatch) {
+  UserModel.authenticate(username, password)
+  .then((loggedUserId) => {
+    if(loggedUserId > 0) {
       // Valid Credentials
       successPrint(`User ${username} is logged in`);
       req.session.username = username;
-      req.session.userId = userId;
+      req.session.userId = loggedUserId;
       res.locals.logged = true;
       req.flash('success', 'You have been successfully logged in!');
-      res.redirect("/");
+      req.session.save( err => {
+        res.redirect('/');
+      });
     } else {
       throw new UserError("Invalid username and/or password", "/login", 200);
     }
@@ -142,7 +164,7 @@ router.post('/login', (req, res, next) => {
     } else {
       next(err);
     }
-  })
+  });
 });
 
 /* LOG OUT */

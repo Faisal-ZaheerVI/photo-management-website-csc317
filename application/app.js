@@ -11,6 +11,7 @@ var handlebars = require("express-handlebars");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var postsRouter = require("./routes/posts");
+var commentRouter = require("./routes/comments");
 var errorPrint = require('./helpers/debug/debugprinters').errorPrint;
 var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
 // var dbRouter = require('./routes/dbtest');
@@ -70,14 +71,14 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRouter); // route middleware from ./routes/index.js
-// app.use("/dbtest", dbRouter);
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
 app.use('/posts', postsRouter); // route middleware from ./routes/posts.js
+app.use('/comments', commentRouter);  
 
-app.use((err, req, res, next) => {
-    res.status(500);
-    res.send('something went wrong with your db');
-})
+// app.use((err, req, res, next) => {
+//     res.status(500);
+//     res.send('something went wrong with your db');
+// })
 
 /**
  * Catch all route, if we get to here then the 

@@ -82,15 +82,6 @@ input[type=text], [type=password], [type=email] {
     margin: 0 0 0 37%;
 }
 
-#imagepost {
-    text-align: center;
-}
-
-/* .imgpost {
-    border: 1px solid black;
-    border-radius: 25px;
-} */
-
 .invalid {
     color: red;
 }
