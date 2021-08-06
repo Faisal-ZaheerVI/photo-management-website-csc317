@@ -1,31 +1,37 @@
-<div class="form-container">
+<div id="reg-container" class="form-container">
     <header class="form-header">
         <h1>Registration here:</h1>
     </header>
-    <form class="form-reg" method="POST" action="/users/register" enctype="application/x-www-form-urlencoded">
-        <label id="lbl-username" for="username" class="form-lbl form-lbl-uname">Username</label>
-        <input id="username" name="username" type="text" class="text-input form-input-uname" placeholder="Enter a username" required>
-        <div id="uname-error"></div>
-        <br /><br />
-        <label id="lbl-email" for="email" class="form-lbl form-lbl-email">Email</label>
-        <input id="email" name="email" type="email" class="text-input form-input-email" placeholder="Enter an email address" required>
-        <div id="email-error"></div>
-        <br /><br />
-        <label id="lbl-password" for="password" class="form-lbl form-lbl-passwd">Password</label>
-        <input id="password" name="password" type="password" class="text-input form-input-passwd" placeholder="Enter a password" required>
-        <div id="passwd-error"></div>
-        <br /><br />
-        <label id="lbl-cpassword" for="cpassword" class="form-lbl form-lbl-cpasswd">Confirm Password</label>
-        <input id="cpassword" type="password" class="text-input form-input-cpasswd" placeholder="Confirm password" required>
-        <div id="cpasswd-error"></div>
-        <br /><br />
-        <input id="age-check" type="checkbox" required>
-        <label id="lbl-agecheck" for="age-check" class="form-checkbox">I certify that I am 13 years of age or older.</label>
-        <br /><br />
-        <input id="tos-pr-check" type="checkbox" required>
-        <label id="lbl-tos-pr-check" for="tos-pr-check" class="form-checkbox">I have read and accept the <a href="#">Terms of Service</a> and <a href="#">Privacy Rules</a>.</label>
-        <br /><br />
-        <button id="submit" type="submit">Submit</button>
-        <button id="cancel" type="reset">Cancel</button>
+    <form id="reg-form" class="form-content" method="POST" action="/users/register" enctype="application/x-www-form-urlencoded">
+        <div id="reg-uname">
+            <label id="lbl-username" for="username" class="form-lbl form-lbl-uname">Username</label>
+            <input id="username" name="username" type="text" class="form-input form-input-uname" placeholder="Enter a username" required>
+            <div id="uname-error"></div>
+        </div>
+        <div id="reg-email">
+            <label id="lbl-email" for="email" class="form-lbl form-lbl-email">Email</label>
+            <input id="email" name="email" type="text" class="form-input form-input-email" placeholder="Enter an email address" required>
+            <div id="email-error"></div>
+        </div>
+        <div id="reg-passwd">
+            <label id="lbl-password" for="password" class="form-lbl form-lbl-passwd">Password</label>
+            <input id="password" name="password" type="password" class="form-input form-input-passwd" placeholder="Enter a password" required>
+            <div id="passwd-error"></div>
+        </div>
+        <div id="reg-cpasswd">
+            <label id="lbl-cpassword" for="cpassword" class="form-lbl form-lbl-cpasswd">Confirm Password</label>
+            <input id="cpassword" type="password" class="form-input form-input-cpasswd" placeholder="Confirm password" required>
+            <div id="cpasswd-error"></div>
+        </div>
+        <div id="reg-check">
+            <input id="age-check" type="checkbox" required>
+            <label id="lbl-agecheck" for="age-check" class="form-checkbox">I certify that I am 13 years of age or older.</label>
+            <input id="tos-pr-check" type="checkbox" required>
+            <label id="lbl-tos-pr-check" for="tos-pr-check" class="form-checkbox">I have read and accept the <a href="#">Terms of Service</a> and <a href="#">Privacy Rules</a>.</label>
+        </div>
+        <div id="reg-btns">
+            <button id="submit" class="form-btns" type="submit">Submit</button>
+            <button id="cancel" class="form-btns" type="reset">Clear</button>
+        </div>
     </form>
 </div>

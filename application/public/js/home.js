@@ -26,7 +26,6 @@ function addFlashFromFrontEnd(message, level) {
     setFlashMessageFadeOut(flashMessageDiv);
 }
 
-/*
 function addFlashFromFrontEnd(message) {
     let flashMessageDiv = document.createElement('div');
     let innerFlashDiv = document.createElement('div');
@@ -38,7 +37,6 @@ function addFlashFromFrontEnd(message) {
     document.getElementsByTagName('body')[0].appendChild(flashMessageDiv);
     setFlashMessageFadeOut(flashMessageDiv);
 }
-*/
 
 function createCard(postData) {
     return `<div id="post-${postData.id}" class="card">

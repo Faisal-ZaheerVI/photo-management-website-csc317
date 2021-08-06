@@ -1,47 +1,20 @@
-{{!-- <div class="form-container" id="imagepost">
-    <header>
-        <h1>Post Title</h1>
-        <h2>Post Author</h2>
-        <h3>Post created at 00:00</h3>
-    </header>
-    <img src="https://fakeimg.pl/300/" alt="Post's image" class="imgpost">
-</div> --}}
-
-{{!-- <div id="post-container">
-    <img id="image-post-image" src="/{{currentPost.photopath}}">
-    <div id="info-message-grid">
-        <div id="info">
-            <header id="image-post-title">
-                <h2 id="image-post-title-text">{{currentPost.title}}</h2>
-            </header>
-            <div id="image-post-author" class="info-tags">{{currentPost.username}}</div>
-            <div id="image-post-date" class="info-tags">{{currentPost.created}}</div>
-            <div id="image-post-desc" class="info-tags">{{currentPost.description}}</div>
-        </div>
-        <div id="messages">
-            <header id="comment-title">
-                <h2>Comments</h2>
-            </header>
-            <div id="message-list">
-
-            </div>
-            <div id="comment-box">
-                <textarea id="comment-box-text"></textarea>
-                <i id="comment-box-button" class="fa fa-comment" aria-hidden="true" style="text-align: center;"></i>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
 <div id="post-container">
     <div id="photo-container">
+        <img id="post-image" class="img-fluid" src="/{{currentPost.photopath}}" alt="A photo should have been here">
+        {{!-- <div id="post-title">{{currentPost.title}}</div>
+        <div id="post-info">
+            <p><span class="form-label">Posted by:</span> <span id="post-author">{{currentPost.username}}</span></p>
+            <p><span class="form-label">Post at: </span> <span id="post-date">{{currentPost.created}}</span></p>
+        </div>
+        <div id="post-description" class="lead">{{currentPost.description}}</div> --}}
+    </div>
+    <div id="info-container">
         <div id="post-title">{{currentPost.title}}</div>
         <div id="post-info">
             <p><span class="form-label">Posted by:</span> <span id="post-author">{{currentPost.username}}</span></p>
             <p><span class="form-label">Post at: </span> <span id="post-date">{{currentPost.created}}</span></p>
         </div>
         <div id="post-description" class="lead">{{currentPost.description}}</div>
-        <img id="post-image" class="img-fluid" src="/{{currentPost.photopath}}" alt="A photo should have been here">
     </div>
     <div id="comment-container">
         <div id="messages">
@@ -64,6 +37,12 @@
     document.addEventListener('DOMContentLoaded', (event) => {
         document.querySelectorAll('span[class=date-posted]').forEach((postedDate) => {
             postedDate.textContent = new Date(postedDate.textContent).toLocaleString();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('span[id=post-date]').forEach((datePosted) => {
+            datePosted.textContent = new Date(datePosted.textContent).toLocaleString();
         });
     });
 

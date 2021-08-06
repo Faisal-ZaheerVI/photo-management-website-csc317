@@ -1,41 +1,145 @@
 .form-container {
-    max-width: 550px;
-    margin: 50px auto;
-    border: 2px solid black;
-    border-radius: 10px;
-    background: linear-gradient(90deg, rgba(242,242,242,1) 0%, rgba(206,206,206,1) 40%, rgba(206,206,206,1) 60%, rgba(242,242,242,1) 100%);
-    padding: 20px;
+    grid-area: content;
+    justify-self: center;
+    align-self: center;
+    /* border: .0625rem solid #cccccc; */
+    border: .0625rem solid rgb(104, 104, 104);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 4%;
+    background-color: #eaeded;
+    box-shadow: -1px 1px 4px 2px #e0e0e0;
+}
+
+#reg-container {
+    display: grid;
+    grid-template-rows: .15fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "form";
+}
+
+#login-container {
+    display: grid;
+    grid-template-rows: .15fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "form"
+    "newacc";
+}
+
+.form-header {
+    grid-area: header;
+    justify-self: center;
+    margin-bottom: 1rem;
+}
+
+.form-header h1 {
+    font-weight: bolder;
+}
+
+.form-content {
+    grid-area: form;
+}
+
+#reg-form {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+}
+
+#login-form {
+    display: grid;
+    grid-template-areas: 
+    "logform"
+    "newacc";
+}
+
+#reg-form div {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto;
+    column-gap: .5rem;
+    margin: .25rem 0;
 }
 
 .form-lbl {
     font-weight: 600;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    align-self: center;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
 }
 
-input[type=text], [type=password], [type=email] {
+.form-input {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+}
+
+#reg-check {
+    display: grid;
+    grid-template-areas: 
+    "checkbox checkname";
+}
+
+#reg-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "button1 button2";
+}
+
+#log-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "button1 button2";
+}
+
+.form-btns {
+    color: #fff;
+    width: 95%;
+    justify-self: center;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+#reg-form input[type=text], [type=password], [type=email] {
     width: 100%;
     padding: 12px 20px;
-    /* margin: 8px 0; */
-    display: inline-block;
+    margin: 8px 0;
+    text-align: start;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
 }
 
-/* input[type=text]:focus, [type=password]:focus {
+#login-form input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    text-align: start;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-content input[type=text]:focus, [type=password]:focus {
     background-color: #cae4ff;
-} */
+}
 
 #submit {
+    grid-area: button2;
     background-color: #4c7faf;
     border: 2px solid #3e668b;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    padding: 12px;
-    font-family: inherit;
-    font-size: 16px;
-    width: 100%;
 }
   
 #submit:hover {
@@ -43,18 +147,9 @@ input[type=text], [type=password], [type=email] {
 }
 
 #cancel {
+    grid-area: button1;
     background-color: #e92020;
     border: 2px solid #801212;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    margin-top: 2em;
-    margin-left: 25%;
-    padding: 6px;
-    font-family: inherit;
-    font-size: 16px;
-    width: 50%;
 }
 
 #cancel:hover {
@@ -62,21 +157,23 @@ input[type=text], [type=password], [type=email] {
 }
 
 #new-account {
-    display: inline-block;
+    /* display: inline-block; */
+    grid-area: newacc;
     text-align: center;
-    width: 50%;
-    margin: 0 0 0 25%;
-    background-color: #4caf5c;
-    color: white;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    margin-top: 1rem;
+    /* width: 50%; */
+    /* margin: 0 0 0 25%; */
+    /* background-color: #4caf5c; */
+    /* color: white; */
+    /* padding: 14px 20px; */
+    /* border: none; */
+    /* border-radius: 4px; */
+    /* cursor: pointer; */
 }
 
-#new-account:hover {
+/* #new-account:hover {
     background-color: #45a04c;
-}
+} */
 
 #forgotpwd {
     margin: 0 0 0 37%;

@@ -4,20 +4,15 @@ var db = require('../config/database');
 const UserModel = require('../models/Users');
 const UserError = require('../helpers/error/UserError');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
+const {registerValidator, loginValidator} = require('../middleware/validation');
 var bcrypt = require('bcrypt');
 
 /* REGISTER */
-router.post('/register', (req, res, next) => {
+router.post('/register', registerValidator, (req, res, next) => {
   let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
   let cpassword = req.body.password;
-
-  /**
-   * Do server side validation
-   * not done in video, must do on your own
-   * Don't rely on just front end validation
-   */
 
   UserModel.usernameExists(username)
   .then((userNameDoesExist) => {
@@ -68,67 +63,10 @@ router.post('/register', (req, res, next) => {
       next(err);
     }
   });
-
-/*
-  db.execute("SELECT * FROM csc317db.users WHERE username=?", [username])
-  .then(([results, fields]) => {
-    if(results && results.length == 0) {
-      return db.execute("SELECT * FROM csc317db.users WHERE email=?", [email]);
-    } else {
-      throw new UserError(
-        "Registration Failed: Username already exists",
-        "/registration",
-        200
-      );
-    }
-  })
-  .then(([results, fields]) => {
-    if(results && results.length == 0) {
-      // Hashes password for 2^15 rounds (~3 sec/hash)
-      return bcrypt.hash(password, 15);
-    } else {
-      throw new UserError(
-        "Registration Failed: Email already exists",
-        "/registration",
-        200
-      );
-    }
-  })
-  .then((hashedPassword) => {
-    let baseSQL = "INSERT INTO csc317db.users (username, email, password, created) VALUES (?,?,?,now());";
-    return db.execute(baseSQL, [username, email, hashedPassword]);
-  })
-  .then(([results, fields]) => {
-    if(results && results.affectedRows) {
-      successPrint("User.js --> User was created!");
-      req.flash('success', 'User account has been made!');
-      res.redirect('/login');
-    } else {
-      throw new UserError(
-        "Server Error, user could not be created",
-        "/registration",
-        500
-      );
-    }
-  })
-  .catch((err) => {
-    errorPrint("User could not be made", err);
-    if(err instanceof UserError) {
-      // User error
-      errorPrint(err.getMessage());
-      req.flash('error', err.getMessage());
-      res.status(err.getStatus());
-      res.redirect(err.getRedirectURL());
-    } else {
-      // General Errors
-      next(err);
-    }
-  });
-  */
 });
 
 /* LOG IN */
-router.post('/login', (req, res, next) => {
+router.post('/login', loginValidator, (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
 

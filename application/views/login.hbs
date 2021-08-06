@@ -1,16 +1,23 @@
-<div class="form-container">
+<div id="login-container" class="form-container">
     <header class="form-header">
         <h1>Log In</h1>
     </header>
-    <form id="login-form" method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
-        <label for="username" class="form-label">Username:</label>
-        <input id="username" name="username" type="text" placeholder="Enter your username" required>
-        <br /><br />
-        <label for="password" class="form-label">Password:</label>
-        <input id="password" name="password" type="password" placeholder="Enter your password" required>
-        <br /><br />
-        <button id="submit">Log In</button>
+    <form id="login-form" class="form-content" method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
+        <div id="log-uname">
+            <label for="username" class="form-lbl">Username</label>
+            <input id="username" class="form-input" name="username" type="text" placeholder="Enter your username" required>
+        </div>
+        <div id="log-passwd">
+            <label for="password" class="form-lbl">Password</label>
+            <input id="password" class="form-input" name="password" type="password" placeholder="Enter your password" required>
+        </div>
+        <div id="log-btns">
+            <button id="submit" class="form-btns" type="submit">Log In</button>
+            <button id="cancel" class="form-btns" type="reset">Clear</button>
+        </div>
     </form>
-    <br /><hr /><br />
-    <a href="/registration" id="new-account">Create New Account</a>
+    <div id="new-account">
+        <span style="text-align: center;">Don't have an account? <a href="/registration">Sign up</a></span>
+    </div>
+    {{!-- <a href="/registration" id="new-account" class="form-btns">Create New Account</a> --}}
 </div>
