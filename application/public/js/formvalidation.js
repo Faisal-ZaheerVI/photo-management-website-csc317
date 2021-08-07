@@ -1,4 +1,4 @@
-const form = document.getElementById('form-reg');
+const regform = document.getElementById('reg-form');
 const unameVal = document.getElementById('username');
 const emailVal = document.getElementById('email');
 const passwdVal = document.getElementById('password');
@@ -12,17 +12,17 @@ const cpasswdError = document.getElementById("cpasswd-error");
 var unameSuccess, emailSuccess, passwdSuccess, cpasswdSuccess;
 unameSuccess = emailSuccess = passwdSuccess = cpasswdSuccess = false;
 
+var logUname, logPasswd;
+logUname = logPasswd = false;
 
-// Reg expressions for email/password validation.
-var uppercaseRegex = /^(?=.*[A-Z]).+$/;
-var specialCharRegex = /^(?=.*[!@#$%^&*]).+$/;
-var numberRegex = /^(?=.*[0-9]).+$/;
-var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+var usernameRegex = /^\D\w{2,}$/;
+var emailRegex = /^\S+@\S+$/;
+var passwordRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[(\/*-+!@#$^&*)]).{8,20}$/;
 
 // When submit button pressed, check for validation of inputs.
-form.addEventListener('submit', (e) => {
+regform.addEventListener('submit', (e) => {
     if (unameSuccess && emailSuccess && passwdSuccess && cpasswdSuccess) {
-        alert('Form was submitted!');
+        // alert('Form was submitted!');
         unameSuccess = emailSuccess = passwdSuccess = cpasswdSuccess = false;
     }
     else {
@@ -40,23 +40,22 @@ function checkInputs() {
     // USERNAME VALIDATION
 
     if (username === '' || username === null) {
-        unameError.classList.add("invalid");
         unameError.classList.remove("valid");
+        unameError.classList.add("invalid");
         unameError.innerText = 'Please enter a username';
     }
 
     else if (username.length < 3) {
-        unameError.classList.add("invalid");
         unameError.classList.remove("valid");
+        unameError.classList.add("invalid");
         unameError.innerText = 'Username must be 3 or more characters';
     }
 
     // Check that username begins with a characer [a-zA-Z]
     else if (username.charAt(0) < 'A' || username.charAt(0) > 'z') {
-        unameError.classList.add("invalid");
         unameError.classList.remove("valid");
+        unameError.classList.add("invalid");
         unameError.innerText = 'Username must begin with a character';
-        console.log('Username must begin with a character');
     }
 
     else {
@@ -69,14 +68,14 @@ function checkInputs() {
     // EMAIL VALIDATION 
 
     if (email === '' || email === null) {
-        emailError.classList.add("invalid");
         emailError.classList.remove("valid");
+        emailError.classList.add("invalid");
         emailError.innerText = 'Please enter an email';
     }
 
     else if (!emailRegex.test(email)) {
-        emailError.classList.add("invalid");
         emailError.classList.remove("valid");
+        emailError.classList.add("invalid");
         emailError.innerText = 'Please enter a valid email';
     }
 
@@ -90,32 +89,32 @@ function checkInputs() {
     // PASSWORD VALIDATION
 
     if (password === '' || password === null) {
-        passwdError.classList.add("invalid");
         passwdError.classList.remove("valid");
+        passwdError.classList.add("invalid");
         passwdError.innerText = 'Please enter a password';
     }
 
     else if (password.length < 8) {
-        passwdError.classList.add("invalid");
         passwdError.classList.remove("valid");
+        passwdError.classList.add("invalid");
         passwdError.innerText = 'Password must be at least 8 characters';
     }
 
     else if (!uppercaseRegex.test(password)) {
-        passwdError.classList.add("invalid");
         passwdError.classList.remove("valid");
+        passwdError.classList.add("invalid");
         passwdError.innerText = 'Your password must contain an uppercase character';
     }
 
     else if (!numberRegex.test(password)) {
-        passwdError.classList.add("invalid");
         passwdError.classList.remove("valid");
+        passwdError.classList.add("invalid");
         passwdError.innerText = 'Your password must contain a number';
     }
 
     else if (!specialCharRegex.test(password)) {
-        passwdError.classList.add("invalid");
         passwdError.classList.remove("valid");
+        passwdError.classList.add("invalid");
         passwdError.innerText = 'Your password must contain one of the following: ( / * - + ! @ # $ ^ & )';
     }
 
@@ -129,14 +128,14 @@ function checkInputs() {
     // CONFIRM PASSWORD VALIDATION
 
     if (cpassword === '' || cpassword === null) {
-        cpasswdError.classList.add("invalid");
         cpasswdError.classList.remove("valid");
+        cpasswdError.classList.add("invalid");
         cpasswdError.innerText = 'Please confirm your password';
     }
 
     else if (cpassword !== password) {
-        passwdError.classList.add("invalid");
-        passwdError.classList.remove("valid");
+        cpasswdError.classList.remove("valid");
+        cpasswdError.classList.add("invalid");
         cpasswdError.innerText = 'Passwords do NOT match';
     }
 
