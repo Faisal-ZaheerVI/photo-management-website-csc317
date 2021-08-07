@@ -15,6 +15,10 @@ unameSuccess = emailSuccess = passwdSuccess = cpasswdSuccess = false;
 var logUname, logPasswd;
 logUname = logPasswd = false;
 
+var uppercaseRegex = /^(?=.*[A-Z]).+$/;
+var specialCharRegex = /^(?=.*[!@#$%^&*]).+$/;
+var numberRegex = /^(?=.*[0-9]).+$/;
+
 var usernameRegex = /^\D\w{2,}$/;
 var emailRegex = /^\S+@\S+$/;
 var passwordRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[(\/*-+!@#$^&*)]).{8,20}$/;
