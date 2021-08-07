@@ -12,7 +12,7 @@ const checkUsername = (username) => {
 
 const checkEmail = (email) => {
     // Simple email regex requires an alphanumeric characer before AND after a literal '@' character 
-    let emailChecker = /^\w+@\w+$/;
+    let emailChecker = /^\S+@\S+$/;
     return emailChecker.test(email);
 };
 
@@ -25,6 +25,7 @@ const registerValidator = (req, res, next) => {
     let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
+    let cpassword = req.body.cpassword;
 
     if(!checkUsername(username)) {
         // Invalid username
@@ -41,6 +42,12 @@ const registerValidator = (req, res, next) => {
     } else if(!checkPassword(password)) {
         // Invalid password
         req.flash('error', "Invalid password!");
+        req.session.save(err => {
+            res.redirect("/registration");
+        });
+    } else if(password !== cpassword) {
+        // Invalid password
+        req.flash('error', "Passwords don't match!");
         req.session.save(err => {
             res.redirect("/registration");
         });

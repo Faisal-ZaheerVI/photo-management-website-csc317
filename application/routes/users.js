@@ -47,7 +47,9 @@ router.post('/register', registerValidator, (req, res, next) => {
     } else {
       successPrint("User.js --> User was created!");
       req.flash('success', 'User account has been made!');
-      res.redirect('/login');
+      req.session.save( err => {
+        res.redirect('/login');
+      });
     }
   })
   .catch((err) => {

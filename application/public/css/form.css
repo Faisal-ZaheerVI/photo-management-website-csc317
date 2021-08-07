@@ -1,3 +1,4 @@
+/* GENERAL FORM CSS */
 .form-container {
     grid-area: content;
     justify-self: center;
@@ -11,23 +12,9 @@
     box-shadow: -1px 1px 4px 2px #e0e0e0;
 }
 
-#reg-container {
-    display: grid;
-    grid-template-rows: .15fr;
-    grid-template-columns: 1fr;
-    grid-template-areas: 
-    "header"
-    "form";
-}
-
-#login-container {
-    display: grid;
-    grid-template-rows: .15fr;
-    grid-template-columns: 1fr;
-    grid-template-areas: 
-    "header"
-    "form"
-    "newacc";
+.form-box {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .form-header {
@@ -42,27 +29,6 @@
 
 .form-content {
     grid-area: form;
-}
-
-#reg-form {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr;
-}
-
-#login-form {
-    display: grid;
-    grid-template-areas: 
-    "logform"
-    "newacc";
-}
-
-#reg-form div {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: auto;
-    column-gap: .5rem;
-    margin: .25rem 0;
 }
 
 .form-lbl {
@@ -83,6 +49,44 @@
     text-align: center;
 }
 
+.form-btns {
+    color: #fff;
+    width: 95%;
+    justify-self: center;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.form-content input[type=text]:focus, [type=password]:focus {
+    background-color: #cae4ff;
+}
+
+/* REGISTRATION CSS */
+
+#reg-container {
+    display: grid;
+    grid-template-rows: .15fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "form";
+}
+
+#reg-form {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+}
+
+#reg-form div {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto;
+    column-gap: .5rem;
+    margin: .25rem 0;
+}
+
 #reg-check {
     display: grid;
     grid-template-areas: 
@@ -97,23 +101,6 @@
     "button1 button2";
 }
 
-#log-btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 
-    "button1 button2";
-}
-
-.form-btns {
-    color: #fff;
-    width: 95%;
-    justify-self: center;
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 4px;
-}
-
 #reg-form input[type=text], [type=password], [type=email] {
     width: 100%;
     padding: 12px 20px;
@@ -121,6 +108,33 @@
     text-align: start;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+/* LOGIN CSS */
+
+#login-container {
+    display: grid;
+    grid-template-rows: .15fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "form"
+    "newacc";
+}
+
+#login-form {
+    display: grid;
+    grid-template-areas: 
+    "logform"
+    "newacc";
+}
+
+#log-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "button1 button2";
 }
 
 #login-form input {
@@ -132,9 +146,57 @@
     border-radius: 4px;
 }
 
-.form-content input[type=text]:focus, [type=password]:focus {
-    background-color: #cae4ff;
+/* POST/UPLOAD AN IMAGE CSS */
+
+#upload-container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "pi-header"
+    "pi-prompt"
+    "pi-upload";
 }
+
+#upload-header {
+    grid-area: pi-header;
+    justify-self: center;
+    margin-bottom: 1rem;
+}
+
+#upload-header h1 {
+    font-weight: bolder;
+}
+
+#upload-image {
+    grid-area: pi-prompt;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "pi-label pi-input"; */
+}
+
+#upload-title {
+    width: 100%;
+    border: .0625rem solid #ccc;
+    border-radius: .75rem;
+    height: 2rem;
+}
+
+#upload-desc {
+    padding: .5rem;
+    width: 100%;
+    height: 10rem;
+    border: .0625rem solid #ccc;
+    border-radius: 1rem;
+    vertical-align: top;
+    text-align: left;
+}
+
+/* ADDITIONAL BUTTON + MISC CSS */
 
 #submit {
     grid-area: button2;
@@ -154,6 +216,19 @@
 
 #cancel:hover {
     background-color: #cc1d1d;
+}
+
+#upload-btn {
+    grid-area: pi-upload;
+    background-color: #4c7faf;
+    border: 2px solid #3e668b;
+    text-align: center;
+    width: 50%;
+    transform: translateX(50%);
+}
+
+#upload-btn:hover {
+    background-color: #456fa0;
 }
 
 #new-account {

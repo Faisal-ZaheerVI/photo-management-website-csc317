@@ -274,6 +274,9 @@ div[class=card-body] > a[class=card-button] {
 .card-text {
     color: white;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 40%;
 }
 
 /* FOOTER CSS */
