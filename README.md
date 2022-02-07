@@ -6,7 +6,7 @@ Created a photo management website like Imgur.
 - Express Sessions for user authentication
 - MySQL database (user account info, image posts, comments)
 - JavaScript for site functionality
-- HTML/CSS for front-end
+- Handlebars engine for HTML + CSS for front-end
 
 
 # Build/Run Instructions
