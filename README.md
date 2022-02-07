@@ -1,19 +1,12 @@
-# CSC 317 Term Project
+# Photo Management Website
+Created a photo management website like Imgur.
 
-## Purpose
-
-The purpose of this repository is to store all the code for your web application. This also includes the history of all commits made and who made them. Only code submitted on the master branch will be graded.
-
-Please follow the instructions below and fill in the information requested when prompted.
-
-## Student Information
-
-|               | Information   |
-|:-------------:|:-------------:|
-| Student Name  | Faisal Zaheer     |
-| Student ID    | 917567058       |
-| Student Email | fzaheer@mail.sfsu.edu    |
-
+## Technologies include:
+- Node.js, Express for server + front-end 
+- Express Sessions for user authentication
+- MySQL database (user account info, image posts, comments)
+- JavaScript for site functionality
+- HTML/CSS for front-end
 
 
 # Build/Run Instructions
